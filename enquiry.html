@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Enquiry Cart - JNT Rollers</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">JNT ROLLERS</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="products.html" class="dropbtn">Our Products <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="jnt-web.html">JNT WEB</a>
+                        <a href="jnt-silk.html">JNT SILK</a>
+                        <a href="jnt-flex.html">JNT FLEX</a>
+                        <a href="jnt-gravure.html">JNT GRAVURE</a>
+                        <a href="jnt-lam.html">JNT LAM</a>
+                        <a href="jnt-hyplon.html">JNT HYPLON</a>
+                        <a href="jnt-neoprene.html">JNT NEOPRENE</a>
+                        <a href="jnt-silicon.html">JNT SILICON</a>
+                        <a href="jnt-pu.html">JNT PU</a>
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li>
+                    <a href="enquiry.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="enquiry-section">
+            <div class="contact-header">
+                <h1 class="section-heading">Enquiry Summary</h1>
+                <p class="section-subheading">Review items, adjust quantities, and submit your enquiry.</p>
+            </div>
+            <div class="enquiry-container">
+                <div class="cart-items-list" id="cart-items-container">
+                    </div>
+                <div class="enquiry-summary" id="enquiry-form-wrapper">
+                    <h3>Your Details</h3>
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="3ac862eb-a148-4e2a-87ca-bd7eb80fd8d3"> <input type="hidden" name="subject" value="New Product Enquiry from JNT Rollers Website">
+                        <input type="hidden" name="Enquiry Details" id="enquiryProducts">
+                        
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email Address" required>
+                        <input type="tel" name="phone" placeholder="Your Phone Number (Optional)">
+                        <textarea name="message" rows="4" placeholder="Any additional message..."></textarea>
+                        
+                        <button type="submit">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>JNT ROLLERS</h3>
+                <p>Leading manufacturers of high-quality, precision-engineered rubber rollers for various industries since a decade.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html">Our Products</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <address>
+                    <p><i class="fas fa-industry"></i> <a href="https://maps.google.com/maps?q=G-88+Sector+1,+Bawana+Industrial+Area,+Delhi-39&output=embed" target="_blank" rel="noopener noreferrer">G-88 Sector 1, Bawana Industrial Area, Delhi-39</a></p>
+                    <p><i class="fas fa-headset"></i> <a href="tel:+919334034675">+91-9334034675 | +91-9334432405</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:jntrollersvaishalibihar@gmail.com">jntrollersvaishalibihar@gmail.com</a></p>
+                </address>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 JNT Rollers. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <a href="#" id="back-to-top-btn"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="js/main.js"></script>
+    <script>
+        // --- THIS SCRIPT IS ONLY FOR ENQUIRY.HTML ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartContainer = document.getElementById('cart-items-container');
+            const formWrapper = document.getElementById('enquiry-form-wrapper');
+            let cart = JSON.parse(localStorage.getItem('enquiryCart')) || [];
+
+            function displayCartItems() {
+                cartContainer.innerHTML = '';
+                if (cart.length === 0) {
+                    formWrapper.style.display = 'none';
+                    cartContainer.innerHTML = `<div class="empty-cart-container"><i class="fas fa-shopping-cart"></i><p>Your Enquiry Cart is Empty</p><a href="products.html" class="cta-button">Explore Products</a></div>`;
+                    return;
+                }
+                
+                formWrapper.style.display = 'block';
+                cartContainer.innerHTML = '<h3>Items in Your Cart</h3>';
+                
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <div class="quantity-selector">
+                                <button type="button" class="quantity-btn minus-btn" data-id="${item.id}" title="Decrease quantity">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" readonly>
+                                <button type="button" class="quantity-btn plus-btn" data-id="${item.id}" title="Increase quantity">+</button>
+                            </div>
+                        </div>
+                        <button type="button" class="cart-item-remove" data-id="${item.id}" title="Remove Item"><i class="fas fa-trash-alt"></i></button>
+                    `;
+                    cartContainer.appendChild(itemElement);
+                });
+                attachEventListeners();
+                updateEnquiryForm();
+            }
+
+            function updateCart(productId, newQuantity) {
+                cart = cart.map(item => {
+                    if (item.id === productId) {
+                        return { ...item, quantity: newQuantity };
+                    }
+                    return item;
+                });
+                cart = cart.filter(item => item.quantity > 0);
+                localStorage.setItem('enquiryCart', JSON.stringify(cart));
+                displayCartItems();
+                updateCartCount(); // This is the global function from main.js
+            }
+            
+            function updateEnquiryForm() {
+                const enquiryProductsInput = document.getElementById('enquiryProducts');
+                if(enquiryProductsInput) {
+                    const productDetails = cart.map(item => `${item.name} (Quantity: ${item.quantity})`).join('\\n'); // Using \\n for newline in email
+                    enquiryProductsInput.value = productDetails;
+                }
+            }
+
+            function attachEventListeners() {
+                document.querySelectorAll('.minus-btn').forEach(btn => btn.addEventListener('click', e => {
+                    const id = e.target.closest('button').dataset.id;
+                    const item = cart.find(i => i.id === id);
+                    if (item && item.quantity > 1) updateCart(id, item.quantity - 1);
+                }));
+                document.querySelectorAll('.plus-btn').forEach(btn => btn.addEventListener('click', e => {
+                    const id = e.target.closest('button').dataset.id;
+                    const item = cart.find(i => i.id === id);
+                    if (item) updateCart(id, item.quantity + 1);
+                }));
+                document.querySelectorAll('.cart-item-remove').forEach(btn => btn.addEventListener('click', e => {
+                    const id = e.target.closest('button').dataset.id;
+                    updateCart(id, 0); // Setting quantity to 0 will remove it
+                }));
+            }
+            displayCartItems();
+        });
+    </script>
+</body>
+</html>
